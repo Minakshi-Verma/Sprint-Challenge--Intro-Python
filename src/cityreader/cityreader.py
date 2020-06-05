@@ -16,10 +16,11 @@
 # should not be loaded into a City object.
 cities = []
 
-def cityreader(cities=[]):
+def cityreader(self, cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
+  self.cities = cities
     
     return cities
 
