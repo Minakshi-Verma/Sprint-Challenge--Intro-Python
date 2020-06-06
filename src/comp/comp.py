@@ -67,7 +67,7 @@ print(f)
 # # The "humans" list should be unmodified.
 print("All names uppercase:")
 # g = [(human.name.upper(),human.age)for human in humans]
-g = [Human(human.name.upper(),human.age+5) for human in humans]
+g = [(Human(human.name.upper(),human.age+5))for human in humans]
 print("old",humans)
 print(g)
 
