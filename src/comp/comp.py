@@ -20,54 +20,59 @@ humans = [
     Human("Igon", 41),
     Human("David", 31),
 ]
-print(humans[3].name)
-print(humans[3].name.startswith("D"))
-
+# print(humans[3].name)
+# print(humans[3].name.startswith("D"))
+# for human in humans:
+#     print(human.name.startswith("D"))
 # Write a list comprehension that creates a list of names of everyone
 # whose name starts with 'D':
-# print("Starts with D:")
-a = [name for i, name, age in enumerate(humans) if name.startswith("D")]
+print("Starts with D:")
+a=[human.name for human in humans if human.name.startswith("D")]
+# a = [name for i, name, age in enumerate(humans) if name.startswith("D")]
 print(a)
 
-# Write a list comprehension that creates a list of names of everyone
-# whose name ends in "e".
+# # Write a list comprehension that creates a list of names of everyone
+# # whose name ends in "e".
 print("Ends with e:")
-b = [name for i, name, age in enumerate(humans) if name.endswith("e")]
+b = [human.name for human in humans if human.name.endswith("e")]
 print(b)
 
-# Write a list comprehension that creates a list of names of everyone
-# whose name starts with any letter between 'C' and 'G' inclusive.
+# # Write a list comprehension that creates a list of names of everyone
+# # whose name starts with any letter between 'C' and 'G' inclusive.
 print("Starts between C and G, inclusive:")
-c = [name for i, name, age in enumerate(humans) if name.startswith("C", "G")]
+allowed = 'CDEFG'
+c = [human.name for human in humans if human.name.startswith(("C","D", "E","F","G"))]
 print(c)
 
 # Write a list comprehension that creates a list of all the ages plus 10.
 print("Ages plus 10:")
-d = [age for i,name,age in enumerate(humans) if age == age+10]
+d = [human.age+10 for human in humans]
 print(d)
 
-# Write a list comprehension that creates a list of strings which are the name
-# joined to the age with a hyphen, for example "David-31", for all humans.
+# # Write a list comprehension that creates a list of strings which are the name
+# # joined to the age with a hyphen, for example "David-31", for all humans.
 print("Name hyphen age:")
-e = []
+e = [(human.name +'-'+ (str(human.age))) for human in humans]
 print(e)
 
-# Write a list comprehension that creates a list of tuples containing name and
-# age, for example ("David", 31), for everyone between the ages of 27 and 32,
-# inclusive.
+# # Write a list comprehension that creates a list of tuples containing name and
+# # age, for example ("David", 31), for everyone between the ages of 27 and 32,
+# # inclusive.
 print("Names and ages between 27 and 32:")
-f = [(name,age) for i, name, age in enumerate(humans) if age>27 and age<32]
+f = [(human.name, human.age) for human in humans if human.age>27 and human.age<33]
 print(f)
 
-# Write a list comprehension that creates a list of new Humans like the old
-# list, except with all the names uppercase and the ages with 5 added to them.
-# The "humans" list should be unmodified.
-# print("All names uppercase:")
-# g = [name.upper(), age+5 for i, name, age in humans.copy()]
-# print(g)
+# # Write a list comprehension that creates a list of new Humans like the old
+# # list, except with all the names uppercase and the ages with 5 added to them.
+# # The "humans" list should be unmodified.
+print("All names uppercase:")
+# g = [(human.name.upper(),human.age)for human in humans]
+g = [Human(human.name.upper(),human.age+5) for human in humans]
+print("old",humans)
+print(g)
 
-# Write a list comprehension that contains the square root of all the ages.
-print("Square root of ages:")
+# # Write a list comprehension that contains the square root of all the ages.
+# print("Square root of ages:")
 import math
-h = [math.sqrt("age") for i, name, age in enumerate(humans)]
+h = [math.sqrt(human.age) for human in humans]
 print(h)

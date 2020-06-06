@@ -14,16 +14,50 @@
 #
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
+# TODO Implement the functionality to read from the 'cities.csv' file
+# For each city record, create a new City instance and add it to the 
+# `cities` list
+import csv
+
+class city:
+    def __init__(self,name,lat,lon):
+        self.name = name
+        self.lat = lat
+        self.lon = lon
+
 cities = []
+# class cities(city):
+#     def __init__(self,name,lat,lon,cities=[]):
+#         super().__init__(name,lat,lon)
+#         self.cities = cities
 
-def cityreader(self, cities=[]):
-  # TODO Implement the functionality to read from the 'cities.csv' file
-  # For each city record, create a new City instance and add it to the 
-  # `cities` list
-  self.cities = cities
     
-    return cities
+def cityreader(self, cities=[]):       
+    # self.cities = cities 
+    with open('./cityreader/cities.csv', mode='r',newline='') as csvfile:
+        city_reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        line_count = 0
+        for row in city_reader:
+            if line_count == 0:
+                print(f'Column names are {", ".join(row)}')
+                line_count += 1
+            else:
+                print(f'{row[0]}, {row[1]}, {row[2]}.')
+                # line_count += 1
+                print("none")
 
+    with open('cityreader/cities.csv', 'w', newline='') as csvfile:
+        fieldnames = ['city', 'lat', 'lon']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        new_city=writer.writerow({'city': 'livingston', 'lat': 5382.2, 'lon': 456.34})
+
+        # city_writer = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL) 
+
+        # new_city = city_writer.writerow(['West Orange', 12438.3, -345.78])  
+        self.cities.append(new_city)   
+    return cities
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
