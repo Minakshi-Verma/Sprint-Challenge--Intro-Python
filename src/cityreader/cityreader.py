@@ -19,50 +19,81 @@
 # `cities` list
 import csv
 
-class city:
-    def __init__(self,name,lat,lon):
+class City:
+    def __init__(self,name,lat,lng):
         self.name = name
         self.lat = lat
-        self.lon = lon
+        self.lng = lng
 
+# city1=City('testcity',234.89,-898.90)
+# print(city1.name)
 cities = []
-# class cities(city):
-#     def __init__(self,name,lat,lon,cities=[]):
-#         super().__init__(name,lat,lon)
-#         self.cities = cities
-
     
-def cityreader(self, cities=[]):       
-    # self.cities = cities 
-    with open('./cityreader/cities.csv', mode='r',newline='') as csvfile:
-        city_reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-        line_count = 0
-        for row in city_reader:
-            if line_count == 0:
-                print(f'Column names are {", ".join(row)}')
-                line_count += 1
-            else:
-                print(f'{row[0]}, {row[1]}, {row[2]}.')
-                # line_count += 1
-                print("none")
+def cityreader():    
+    
+    with open('./cityreader/cities.csv','r') as csvfile:
+        # csv_reader = csv.DictReader(csvfile)
+        csv_reader = csv.DictReader(csvfile)
 
-    with open('cityreader/cities.csv', 'w', newline='') as csvfile:
-        fieldnames = ['city', 'lat', 'lon']
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        with open('./cityreader/newcities.csv', 'w') as csvfile:
+            fieldnames= ['city','lat', 'lng']
+            csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=' ')
+            csv_writer.writeheader()
 
-        writer.writeheader()
-        new_city=writer.writerow({'city': 'livingston', 'lat': 5382.2, 'lon': 456.34})
+            
+            for line in csv_reader:
+              #following attributes have been omitted from the output
+                del line['state_name']
+                del line['county_name']
+                del line['population']
+                del line['density']
+                del line['timezone']
+                del line['zips']
+                csv_writer.writerow(line)               
+                csv_writer.writerow({'city':'West Orange', 'lat':438.3, 'lng':-35.78})                
+                print(line)
+                                
+#--------------------------------
+#using csv.reader method
+    # with open('./cityreader/cities.csv','r') as csvfile:
+    #     # csv_reader = csv.DictReader(csvfile)
+    #     csv_reader = csv.reader(csvfile)
+    #     with open('./cityreader/newcities.csv', 'w') as csvfile:
+    #         #row= city,state_name, lat, lng,, county_name population,density, timezone,zips
+    #         city =row[0]
+    #         state_name=row[1]
+    #         lat=float(row[2])
+    #         lng=float(row[3])
+    #         county_name=row[4]
+    #         population= int(row[5])
+    #         density=int(row[6])
+         
+    #         fieldnames= ['city','lat', 'lng']
+    #         csv_writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter='\t')
+    #         csv_writer.writeheader()
 
-        # city_writer = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL) 
+    #         for line in csv_reader:
+    #           del line['state_name']
+    #           del line['county_name']
+    #           del line['population']
+    #           del line['density']
+    #           del line['timezone']
+    #           del line['zips']
+              
+    #           # csv_writer.writerow(line)
+    #           csv_writer.writerow({'city':'West Orange', 'lat':438.3, 'lng':-35.78})
+    #           csv_writer.writerow({'name':'Orange', 'lat':4938.3, 'lng':-375.78})
+    #           csv_writer.writerow({'name':'test', 'lat':438.3, 'lng':-35.78})
+    #           csv_writer.writerow({'name':'new city', 'lat':38.3, 'lng':-375.78})
 
-        # new_city = city_writer.writerow(['West Orange', 12438.3, -345.78])  
-        self.cities.append(new_city)   
+    #           # Print the list of cities (name, lat, lon), 1 record per line.
+    #           print(line) 
+    #           print(cities.append(line)) 
+      #--------------------------------                  
+  
     return cities
-cityreader(cities)
+cityreader()
 
-# Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(c)
 
 # STRETCH GOAL!
 #
