@@ -36,7 +36,7 @@ def cityreader():
             cities.append(City(line[0],float(line[3]),float(line[4])))
             print(cities)
             for c in cities:
-              print(c.name, c.lon, c.lon)
+              print(c.name, c.lat, c.lon)
     return cities
 cityreader()
 
