@@ -2,11 +2,15 @@ import unittest
 from cityreader import City, cityreader
 
 def check_city(inp, exp):
+    # print(-122.6500 ==-122.65)
     if inp.name != exp.name:
       return False
     if inp.lat != exp.lat:
+      # print("lat",inp.lng, exp.lng)
       return False
     if inp.lon != exp.lon:
+      # print("lng",inp.lng, exp.lng)
+      # print(type(exp.lng)==type(inp.lng))
       return False
     return True
 
@@ -77,9 +81,13 @@ class CityreaderTests(unittest.TestCase):
     ]
     
   def test_cityreader_correctness(self):
+    print(len(self.cities))
     for i in range(len(self.cities)):
+      # print(self.cities[i].name, self.expected[i].name)
       self.assertTrue(check_city(self.cities[i], self.expected[i]))
-
+      # print(self.cities[i].lng, self.expected[i].lng)
+      # print(len(self.expected))
+      
 
 if __name__ == '__main__':
   unittest.main()
